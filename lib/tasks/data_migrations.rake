@@ -2,7 +2,7 @@ require 'rake'
 
 namespace :data do
   def migrations_path
-    RailsDataMigrations::Migrator.migrations_path
+    Rails.application.config.paths['db/data_migrations'].to_a
   end
 
   def apply_single_migration(direction, version)
@@ -62,7 +62,7 @@ namespace :data do
       puts "#{format('% 16s', 'Migration ID')}  Migration Name"
       puts '--------------------------------------------------'
       migrator = RailsDataMigrations::Migrator
-      migrator.open(migrator.migrations_path).pending_migrations.each do |m|
+      migrator.open(migrations_path).pending_migrations.each do |m|
         puts "#{format('% 16i', m.version)}  #{m.name.to_s.titleize}"
       end
     end
