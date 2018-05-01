@@ -35,7 +35,7 @@ module RailsDataMigrations
       end
 
       def migrations_path
-        Rails.application.config.paths['db/data_migrations'].to_a
+        'db/data_migrations'
       end
 
       def rails_5_2?
@@ -44,7 +44,7 @@ module RailsDataMigrations
 
       def list_migrations
         if rails_5_2?
-          ::ActiveRecord::MigrationContext.new(migrations_path).migrations
+          ::ActiveRecord::MigrationContext.new(Rails.application.config.paths['db/data_migrations'].to_a).migrations
         else
           migrations(migrations_path)
         end
