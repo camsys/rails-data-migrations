@@ -35,7 +35,7 @@ module RailsDataMigrations
       end
 
       def migrations_path
-        'db/data_migrations'
+        Rails.application.config.paths['db/data_migrations'].to_a
       end
 
       def rails_5_2?
